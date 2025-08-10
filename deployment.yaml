@@ -1,36 +1,36 @@
 apiVersion: apps/v1
-kind: Deployment # Kubernetes resource kind we are creating
+kind: Deployment
 metadata:
   name: jpetstore-deployment
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: jpetstore
-  replicas: 2 # Number of replicas that will be created for this deployment
   template:
     metadata:
       labels:
         app: jpetstore
     spec:
       containers:
-        - name: jpetstore
-          image: adijaiswal/cicddevops:6 # Image that will be used to containers in the cluster
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8080 # The port that the container is running on in the cluster
-
+      - name: jpetstore
+        image: 
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
 
 ---
-
-apiVersion: v1 # Kubernetes API version
-kind: Service # Kubernetes resource kind we are creating
-metadata: # Metadata of the resource kind we are creating
+apiVersion: v1
+kind: Service
+metadata:
   name: jpetstore-ssvc
 spec:
   selector:
     app: jpetstore
+  type: NodePort
   ports:
-    - protocol: "TCP"
-      port: 8080 # The port that the service is running on in the cluster
-      targetPort: 8080 # The port exposed by the service
-  type: LoadBalancer # type of the service.
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+    nodePort: 30080
+
