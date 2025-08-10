@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: jpetstore
-        image: 
+        image: rohitsonawane7725/car_price_image:pet_v2
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
